@@ -56,7 +56,7 @@ DispatchQueue.Attributes是队列的属性(结构体)
   
   >leave() 完结事件记录
   
-  >wait() 等待之前提交的任务完成 DispatchTimeoutResult是返回是否处理完成
+  >wait() 等待之前提交的任务完成 返回DispatchTimeoutResult处理结果(完成 超时)
   
   添加和完结的记录相等才会调用notify通知方法
   
