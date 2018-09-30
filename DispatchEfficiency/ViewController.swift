@@ -14,12 +14,30 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setSubview()
         self.addDispatchWorkItemFlagsTest()
         if #available(iOS 10.0, *) {
             self.inActiveQueue()
         } else {
             // Fallback on earlier versions
         }
+    }
+
+    /// 闭包写法
+    func setSubview() {
+        let verification = { () -> String in
+            if #available(iOS 12.0, *){
+                return "最新版本系统"
+            }else{
+                return "旧版本的系统"
+            }
+        }
+
+        let label = UILabel.init(frame: CGRect.init(x: 0, y: 200, width: UIScreen.main.bounds.size.width, height: 20))
+        label.text = verification()
+        label.textAlignment = .center
+        label.textColor = UIColor.cyan
+        self.view.addSubview(label)
     }
 
     override func viewDidAppear(_ animated: Bool) {
