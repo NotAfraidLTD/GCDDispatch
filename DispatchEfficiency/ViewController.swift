@@ -15,12 +15,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setSubview()
-        self.addDispatchWorkItemFlagsTest()
-        if #available(iOS 10.0, *) {
-            self.inActiveQueue()
-        } else {
-            // Fallback on earlier versions
-        }
+//        self.addDispatchWorkItemFlagsTest()
+//        if #available(iOS 10.0, *) {
+//            self.inActiveQueue()
+//        } else {
+//            // Fallback on earlier versions
+//        }
+        self.dispatchTimer()
     }
 
     /// 闭包写法
@@ -292,5 +293,24 @@ class ViewController: UIViewController {
     }
 
 
+    //MARK: GCD定时器
+    func dispatchTimer(){
+        self.timer.setEventHandler {
+            print("定时器触发")
+
+        }
+        self.timer.resume()
+    }
+
+    func cancelTimer(){
+        // 没有执行cancel 事件不触发
+        timer.cancel()
+    }
+
+    fileprivate lazy var timer : DispatchSourceTimer = {
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
+        timer.schedule(deadline: .now(), repeating: 3);
+        return timer
+    }()
 }
 
